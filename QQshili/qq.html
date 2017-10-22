@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+	
+	<head>
+    	<title>QQ登录界面</title>
+    	<meta charset="utf-8"/>
+    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    	<meta name="viewport" content="width=device-width, initial-scale=1">
+    	<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+    	<script src="js/jquery-2.2.2.js"></script>
+    	<script src="js/jquery.mobile-1.4.5.min.js"></script>
+    	<script type="text/javascript">
+		 	var btn=document.getElementById('btn');
+		 	button.onclick{function(){
+		 		alert("已成功登陆");
+		 	}
+		 		
+		 	}
+		 	var user=document.getElementById('user');
+		 	var mima=document.getElementById('mima');
+		 	var 
+		 	
+		</script>
+    	<style>
+    		.anniu{
+    			width: 400px;
+    			margin: auto;
+    		}
+    		.tijiao{
+    			width: 400px;
+    			margin: auto;
+    		}
+    	</style>
+	</head>
+	
+	<body>
+		<div data-role="page" id="firstpage" class="denglu">
+			<div data-role="contenet">
+				<div align="center"><img style="width: 200px;height: 200px;" src="images/qq图.jpg"></div>
+				<div data-role="fieldcontain" class="login">				     
+				    <input type="text" id="username" placeholder="账号" />
+				    <input type="text" id="psw" placeholder="密码" />
+				    <a href="#" id="log" data-role="button" style=" border:#3366ff;;background-color:#3366ff; color: white;">登录</a>
+				    <a href="#secondpage" data-transition="slide" data-direction="reverse">注册</a>
+				</div>
+				
+			</div>
+			
+		</div>
+		<div data-role="page" id="secondpage" class="zhuceye">
+		 	<div data-role="contnet" >
+		 		<div data-role="fieldcontain" class="login">				     
+				    <input type="text" id="username2" placeholder="账号" />
+				    <input type="text"  placeholder="密码" />
+				    <input type="text" id="password" placeholder="确认密码" />
+				    <a href="#" id="zhuce" data-role="button" style=" border:#2266ff;;background-color:#3366ff; color: white;">注册</a>
+					<a href="#firstpage" data-transition="slide" data-direction="reverse">登录</a>
+				</div>
+		 	</div>
+		 </div>
+		<div data-role="page" id="thirdpage">
+			<div data-role="contenet">
+				<div id="lianxiren">
+					<h2 style="text-align: center;color: gray;">联系人</h2>
+					<a href="#" style="text-align: right;"><h3 >添加</h3></a>
+				</div>
+			<div>
+				<input type="search"/>
+			</div>	
+			<ul data-role="listview" data-inset="true" >
+                <li><a href="#">特别关心</a></li>
+                <li><a href="#">朋友</a></li>
+                <li><a href="#">初中同学</a></li>
+                <li><a href="#">高中同学</a></li>
+                <li><a href="#">大学同学</a></li>
+                <li><a href="#">.</a></li>
+                
+            </ul>
+			</div>
+			
+		</div>
+		
+		
+	</body>
+	<script>
+		$("#log").click(function(){
+		  var userid=document.getElementById('username').value;
+		  var psw=document.getElementById("psw").value;
+	      $.ajax({
+			type:'get',
+			url:'http://datainfo.duapp.com/shopdata/userinfo.php',
+			data:{status:'login',userID:userid,password:psw},
+			dataType:'json',
+			success:function(data){					 
+					console.log(data);
+					if(data==0){
+						alert("用户名不存在!");		
+					}
+					else if(data==2){
+						 alert("用户名密码不符");	
+					}
+					else{
+						alert("登陆成功,你的账号："+data.userID);	
+						window.location.href="lianxiren.html";
+						
+					}
+			},
+			error:function(){
+				alert('错误了哈哈！！！');
+				
+				
+			}
+		})
+		})
+		//上面是登录的！！！
+		$("#zhuce").click(function(){
+		  var userid=document.getElementById('username2').value;
+		  var psw=document.getElementById("password").value;
+	      $.ajax({
+			type:'get',
+			url:'http://datainfo.duapp.com/shopdata/userinfo.php',
+			data:{status:'register',userID:userid,password:psw},
+			dataType:'json',
+			success:function(data){					 
+					console.log(data);
+					if(data==0){
+						alert("用户名重名");						 	
+					}
+					else if(data==1){
+						 alert("注册成功！");
+					}					 
+			},
+			error:function(){
+				alert('错误了');				
+				
+			}
+		})
+		})
+		//上面是注册的
+	</script>
+	
+	
+</html>
